@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { MoonIcon, SunIcon } from '@radix-icons/vue'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -18,8 +17,8 @@ const toggleDark = useToggle(isDark)
         variant="outline"
         @click="toggleDark()"
       >
-        <SunIcon v-if="isDark" />
-        <MoonIcon v-else />
+        <Icon v-if="isDark" name="tabler:sun" />
+        <Icon v-else name="tabler:moon" />
       </Button>
     </ClientOnly>
     <slot />

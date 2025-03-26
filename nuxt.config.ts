@@ -19,6 +19,12 @@ export default defineNuxtConfig({
     layoutTransition: { name: 'page', mode: 'out-in' },
   },
 
+  icon: {
+    collections: ['tabler'],
+    mode: 'css',
+    provider: 'iconify',
+    serverBundle: 'local',
+  },
   dir: {
     public: join(srcDir, 'public'),
     // plugins: join(srcDir, 'plugins'),
@@ -71,6 +77,8 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/content',
     '@nuxt/image',
+
+    '@nuxt/icon',
     'nuxt-echarts',
   ],
 
