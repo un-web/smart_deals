@@ -6,6 +6,7 @@ const rootDir = resolve(__dirname)
 const srcDir = join(rootDir, 'src')
 const clientDir = join(srcDir, 'client')
 const serverDir = join(srcDir, 'server')
+const componentsDir = join(clientDir, 'components')
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-08-15',
@@ -25,6 +26,13 @@ export default defineNuxtConfig({
     provider: 'iconify',
     serverBundle: 'local',
   },
+  
+  components: {
+    dirs: [
+      { global: true, path: componentsDir },
+    ],
+  },
+  
   dir: {
     public: join(srcDir, 'public'),
     // plugins: join(srcDir, 'plugins'),
