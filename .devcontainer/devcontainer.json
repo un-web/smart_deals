@@ -1,5 +1,5 @@
 {
-  "name": "consensus",
+  "name": "nuxt-starter",
   "service": "dev",
 
   "dockerComposeFile": "docker-compose.yml",
