@@ -96,4 +96,3 @@ src/
 ├── lib/             # utility functions and configurations
 ├── assets/          # static assets
 ```
-

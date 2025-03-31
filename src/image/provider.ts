@@ -1,6 +1,6 @@
-import { joinURL } from 'ufo'
-
 import type { ProviderGetImage } from '@nuxt/image'
+
+import { joinURL } from 'ufo'
 
 export const getImage: ProviderGetImage = (src, options) => {
   let { baseURL } = options

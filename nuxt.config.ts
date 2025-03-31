@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { join, relative, resolve } from 'pathe'
+import { join, resolve } from 'pathe'
 
 // src dir
 const rootDir = resolve(__dirname)
@@ -16,8 +16,8 @@ export default defineNuxtConfig({
   srcDir,
 
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { mode: 'out-in', name: 'page' },
+    pageTransition: { mode: 'out-in', name: 'page' },
   },
 
   icon: {
@@ -26,13 +26,11 @@ export default defineNuxtConfig({
     provider: 'iconify',
     serverBundle: 'local',
   },
-  
+
   components: {
-    dirs: [
-      { global: true, path: componentsDir },
-    ],
+    dirs: [{ global: true, path: componentsDir }],
   },
-  
+
   dir: {
     public: join(srcDir, 'public'),
     // plugins: join(srcDir, 'plugins'),
@@ -40,38 +38,38 @@ export default defineNuxtConfig({
     app: join(clientDir, 'app'),
     assets: join(clientDir, 'assets'),
     layouts: join(clientDir, 'layouts'),
+    middleware: join(clientDir, 'middleware'),
     modules: join(clientDir, 'modules'),
     pages: join(clientDir, 'pages'),
-    middleware: join(clientDir, 'middleware'),
   },
 
   typescript: {
-    strict: true,
     shim: true,
+    strict: true,
     // typeCheck: true,
   },
 
   nitro: {
-    srcDir,
-    rollupConfig: undefined,
+    debug: true,
     experimental: {
-      wasm: true,
-      tasks: true,
-      database: true,
-      websocket: true,
       asyncContext: true,
+      database: true,
+      tasks: true,
       typescriptBundlerResolution: true,
-    },
-    wasm: {
-      esmImport: true,
-      lazy: true,
+      wasm: true,
+      websocket: true,
     },
     logging: {
       buildSuccess: true,
       compressedSizes: true,
     },
+    rollupConfig: undefined,
+    srcDir,
     timing: true,
-    debug: true,
+    wasm: {
+      esmImport: true,
+      lazy: true,
+    },
   },
 
   modules: [
@@ -91,14 +89,10 @@ export default defineNuxtConfig({
   ],
 
   content: {
-    locales: ['ru', 'en'],
-    sources: {
-      content: {
-        driver: 'fs',
-        prefix: '/content',
-        base: join(srcDir, 'content'),
-      },
+    experimental: {
+      clientDB: true,
     },
+    locales: ['ru', 'en'],
     navigation: {
       fields: [
         'title',
@@ -108,74 +102,77 @@ export default defineNuxtConfig({
         'slug',
       ],
     },
-    experimental: {
-      clientDB: true,
+    sources: {
+      content: {
+        base: join(srcDir, 'content'),
+        driver: 'fs',
+        prefix: '/content',
+      },
     },
   },
 
   shadcn: {
-    prefix: '',
     componentDir: join(clientDir, 'components', 'ui'),
+    prefix: '',
   },
 
   image: {
 
-    providers: {
-    },
+    providers: {},
   },
 
   i18n: {
-    lazy: true,
-    defaultLocale: 'ru',
-    strategy: 'no_prefix',
     customRoutes: 'config',
+    defaultLocale: 'ru',
+    lazy: true,
     routesNameSeparator: '___',
+    strategy: 'no_prefix',
 
     detectBrowserLanguage: {
-      useCookie: true,
       alwaysRedirect: true,
-      cookieKey: 'lang',
       cookieCrossOrigin: true,
+      cookieKey: 'lang',
+      useCookie: true,
     },
 
     langDir: 'languages',
 
     bundle: {
+      dropMessageCompiler: false,
       fullInstall: true,
       runtimeOnly: false,
-      dropMessageCompiler: false,
     },
 
     locales: [
       {
-        name: 'English',
-        language: 'en-US',
-        file: 'en.yml',
         code: 'en',
+        file: 'en.yml',
+        language: 'en-US',
+        name: 'English',
       },
       {
-        name: 'Русский',
-        language: 'ru-RU',
-        file: 'ru.yml',
         code: 'ru',
+        file: 'ru.yml',
+        language: 'ru-RU',
+        name: 'Русский',
       },
     ],
   },
 
   experimental: {
-    headNext: true,
-    asyncEntry: true,
-    typedPages: false,
     appManifest: true,
+    asyncContext: true,
+    asyncEntry: true,
+    crossOriginPrefetch: true,
     externalVue: true,
+    headNext: true,
+    payloadExtraction: true,
     restoreState: true,
     scanPageMeta: true,
-    asyncContext: true,
+    sharedPrerenderData: true,
+    typedPages: false,
     viewTransition: false,
     writeEarlyHints: true,
-    payloadExtraction: true,
-    sharedPrerenderData: true,
-    crossOriginPrefetch: true,
   },
 
   devtools: {

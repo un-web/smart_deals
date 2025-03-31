@@ -1,4 +1,4 @@
-import config from '@consensus/eslint-config'
+import config from '@viapip/eslint-config'
 
 export default config({
   rules: {
