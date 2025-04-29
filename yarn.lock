@@ -636,20 +636,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@consensus/eslint-config@workspace:*, @consensus/eslint-config@workspace:packages/eslint-config":
-  version: 0.0.0-use.local
-  resolution: "@consensus/eslint-config@workspace:packages/eslint-config"
-  dependencies:
-    "@antfu/eslint-config": "npm:^3.16.0"
-    "@types/eslint": "npm:^9.6.1"
-    "@typescript-eslint/parser": "npm:^8.28.0"
-    eslint: "npm:^9.23.0"
-    pkgroll: "npm:^2.11.2"
-    tsx: "npm:^4.19.3"
-    typescript: "npm:^5.8.2"
-  languageName: unknown
-  linkType: soft
-
 "@csstools/selector-resolve-nested@npm:^3.0.0":
   version: 3.0.0
   resolution: "@csstools/selector-resolve-nested@npm:3.0.0"
@@ -2941,26 +2927,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-commonjs@npm:^28.0.2":
-  version: 28.0.2
-  resolution: "@rollup/plugin-commonjs@npm:28.0.2"
-  dependencies:
-    "@rollup/pluginutils": "npm:^5.0.1"
-    commondir: "npm:^1.0.1"
-    estree-walker: "npm:^2.0.2"
-    fdir: "npm:^6.2.0"
-    is-reference: "npm:1.2.1"
-    magic-string: "npm:^0.30.3"
-    picomatch: "npm:^4.0.2"
-  peerDependencies:
-    rollup: ^2.68.0||^3.0.0||^4.0.0
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: 10c0/e90a443e63bfed567d5a4854960240d256818a0b3c69a45e95e196c40a755959406dabe4fbccb886eeb45d3445ddc8f966632563a7d590808be7eee8084384f1
-  languageName: node
-  linkType: hard
-
 "@rollup/plugin-commonjs@npm:^28.0.3":
   version: 28.0.3
   resolution: "@rollup/plugin-commonjs@npm:28.0.3"
@@ -2978,24 +2944,6 @@ __metadata:
     rollup:
       optional: true
   checksum: 10c0/0dbc61a5a894cdf526c3f0a738243cf1b3f634d592db0f2b9cad8c5d8e4c3e645d9b7ac19761c07a8a475118cafa6cdef4746111019388dd6e962f7373878ea4
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-dynamic-import-vars@npm:^2.1.5":
-  version: 2.1.5
-  resolution: "@rollup/plugin-dynamic-import-vars@npm:2.1.5"
-  dependencies:
-    "@rollup/pluginutils": "npm:^5.0.1"
-    astring: "npm:^1.8.5"
-    estree-walker: "npm:^2.0.2"
-    fast-glob: "npm:^3.2.12"
-    magic-string: "npm:^0.30.3"
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: 10c0/b738dc6e627572a382b64c699886fc9d2cc067e17390ac318a506ee8eb6793f9d6091ea75257468eaa4f627bfa79b380109bb4ee8df24e728c1a19c8f9c0cf2f
   languageName: node
   linkType: hard
 
@@ -3026,24 +2974,6 @@ __metadata:
     rollup:
       optional: true
   checksum: 10c0/9400c431b5e0cf3088ba2eb2d038809a2b0fb2a84ed004997da85582f48cd64958ed3168893c4f2c8109e38652400ed68282d0c92bf8ec07a3b2ef2e1ceab0b7
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-node-resolve@npm:^16.0.0":
-  version: 16.0.0
-  resolution: "@rollup/plugin-node-resolve@npm:16.0.0"
-  dependencies:
-    "@rollup/pluginutils": "npm:^5.0.1"
-    "@types/resolve": "npm:1.20.2"
-    deepmerge: "npm:^4.2.2"
-    is-module: "npm:^1.0.0"
-    resolve: "npm:^1.22.1"
-  peerDependencies:
-    rollup: ^2.78.0||^3.0.0||^4.0.0
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: 10c0/b63deb6fc14b37070ccaffacc8c10c9720f28ce7632f4fe2ee77064c0c79bcc3fe060fb77160e673c9fd847307252f25a2983030bd54f1888324063c69ae1399
   languageName: node
   linkType: hard
 
@@ -5076,15 +5006,6 @@ __metadata:
   version: 2.0.0
   resolution: "astral-regex@npm:2.0.0"
   checksum: 10c0/f63d439cc383db1b9c5c6080d1e240bd14dae745f15d11ec5da863e182bbeca70df6c8191cffef5deba0b566ef98834610a68be79ac6379c95eeb26e1b310e25
-  languageName: node
-  linkType: hard
-
-"astring@npm:^1.8.5":
-  version: 1.9.0
-  resolution: "astring@npm:1.9.0"
-  bin:
-    astring: bin/astring
-  checksum: 10c0/e7519544d9824494e80ef0e722bb3a0c543a31440d59691c13aeaceb75b14502af536b23f08db50aa6c632dafaade54caa25f0788aa7550b6b2d6e2df89e0830
   languageName: node
   linkType: hard
 
@@ -7767,13 +7688,6 @@ __metadata:
   version: 2.0.2
   resolution: "estree-walker@npm:2.0.2"
   checksum: 10c0/53a6c54e2019b8c914dc395890153ffdc2322781acf4bd7d1a32d7aedc1710807bdcd866ac133903d5629ec601fbb50abe8c2e5553c7f5a0afdd9b6af6c945af
-  languageName: node
-  linkType: hard
-
-"estree-walker@npm:^0.6.1":
-  version: 0.6.1
-  resolution: "estree-walker@npm:0.6.1"
-  checksum: 10c0/6dabc855faa04a1ffb17b6a9121b6008ba75ab5a163ad9dc3d7fca05cfda374c5f5e91418d783496620ca75e99a73c40874d8b75f23b4117508cc8bde78e7b41
   languageName: node
   linkType: hard
 
@@ -11449,7 +11363,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nuxt-starter@workspace:."
   dependencies:
-    "@consensus/eslint-config": "workspace:*"
     "@formkit/auto-animate": "npm:^0.8.2"
     "@ksassnowski/vueclid": "npm:^1.2.0"
     "@nuxt/content": "npm:^2.13.4"
@@ -12233,32 +12146,6 @@ __metadata:
     exsolve: "npm:^1.0.1"
     pathe: "npm:^2.0.3"
   checksum: 10c0/7729d0a2367ba0aa2caf0f84a6ff0b73b13f4e9a3d62c229ddfa6d45d1f3898f590acdbaa64d779d56737d4ebea2d085961efd59094b8adf8baa34d829599b75
-  languageName: node
-  linkType: hard
-
-"pkgroll@npm:^2.11.2":
-  version: 2.11.2
-  resolution: "pkgroll@npm:2.11.2"
-  dependencies:
-    "@rollup/plugin-alias": "npm:^5.1.1"
-    "@rollup/plugin-commonjs": "npm:^28.0.2"
-    "@rollup/plugin-dynamic-import-vars": "npm:^2.1.5"
-    "@rollup/plugin-inject": "npm:^5.0.5"
-    "@rollup/plugin-json": "npm:^6.1.0"
-    "@rollup/plugin-node-resolve": "npm:^16.0.0"
-    "@rollup/pluginutils": "npm:^5.1.4"
-    esbuild: "npm:^0.24.2"
-    magic-string: "npm:^0.30.17"
-    rollup: "npm:^4.34.6"
-    rollup-pluginutils: "npm:^2.8.2"
-  peerDependencies:
-    typescript: ^4.1 || ^5.0
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  bin:
-    pkgroll: dist/cli.mjs
-  checksum: 10c0/367a468d98161eee0f503d8c8162b6d506cf7fccd66b0cea712d1ed6c260515fa720267585ce14346c077176f6d1caef9f105a871de4ada204c459534f3bc9e0
   languageName: node
   linkType: hard
 
@@ -13572,15 +13459,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-pluginutils@npm:^2.8.2":
-  version: 2.8.2
-  resolution: "rollup-pluginutils@npm:2.8.2"
-  dependencies:
-    estree-walker: "npm:^0.6.1"
-  checksum: 10c0/20947bec5a5dd68b5c5c8423911e6e7c0ad834c451f1a929b1f4e2bc08836ad3f1a722ef2bfcbeca921870a0a283f13f064a317dc7a6768496e98c9a641ba290
-  languageName: node
-  linkType: hard
-
 "rollup@npm:^4.20.0, rollup@npm:^4.23.0":
   version: 4.32.0
   resolution: "rollup@npm:4.32.0"
@@ -13653,7 +13531,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^4.30.1, rollup@npm:^4.34.6, rollup@npm:^4.36.0":
+"rollup@npm:^4.30.1, rollup@npm:^4.36.0":
   version: 4.37.0
   resolution: "rollup@npm:4.37.0"
   dependencies:
@@ -15083,7 +14961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.19.1, tsx@npm:^4.19.3":
+"tsx@npm:^4.19.1":
   version: 4.19.3
   resolution: "tsx@npm:4.19.3"
   dependencies:
