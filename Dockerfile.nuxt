@@ -1,0 +1,22 @@
+# Use Bun base image
+FROM oven/bun:1.2-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY bun.lock ./
+
+# Install dependencies with Bun (17-30x faster than npm) :cite[6]
+RUN bun install
+
+# Copy source code
+COPY . .
+
+# Expose ports
+EXPOSE 3000
+EXPOSE 24678
+
+# Start development server with Bun's hot reloading :cite[9]
+CMD ["bun", "--hot", "run", "dev"]

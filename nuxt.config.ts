@@ -9,6 +9,39 @@ const serverDir = join(srcDir, 'server')
 const componentsDir = join(clientDir, 'components')
 
 export default defineNuxtConfig({
+  // ssr: false,
+   // Runtime Configuration
+  runtimeConfig: {
+    directusUrl: process.env.DIRECTUS_URL || "http://localhost:8055",
+    directusAdminToken: process.env.DIRECTUS_ADMIN_TOKEN,
+    public: {
+      directusUrl:
+        process.env.NUXT_PUBLIC_DIRECTUS_URL || "http://localhost:8055",
+    },
+  },
+
+  // rstore-directus configuration
+  rstoreDirectus: {
+    url: process.env.DIRECTUS_URL || "http://localhost:8055",
+    adminToken: process.env.DIRECTUS_ADMIN_TOKEN,
+  },
+  modules: [
+    '@nuxtjs/partytown',
+    '@nuxtjs/tailwindcss',
+    'nuxt-content-assets',
+    '@nuxtjs/mdc',
+    '@nuxtjs/i18n',
+    '@vueuse/nuxt',
+    'shadcn-nuxt',
+    '@nuxt/fonts',
+    '@nuxt/content',
+    '@nuxt/image',
+    "@rstore/nuxt-directus",
+    '@nuxt/icon',
+    'nuxt-echarts',
+    'nuxt-auth-utils',
+  ],
+
   compatibilityDate: '2024-08-15',
 
   rootDir,
@@ -21,10 +54,11 @@ export default defineNuxtConfig({
   },
 
   icon: {
-    collections: ['tabler'],
+    collections: ['tabler','lucide'],
     mode: 'css',
     provider: 'iconify',
     serverBundle: 'local',
+    cssLayer: 'base'
   },
 
   components: {
@@ -33,7 +67,7 @@ export default defineNuxtConfig({
 
   dir: {
     public: join(srcDir, 'public'),
-    // plugins: join(srcDir, 'plugins'),
+    plugins: join(clientDir, 'plugins'),
 
     app: join(clientDir, 'app'),
     assets: join(clientDir, 'assets'),
@@ -72,21 +106,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@nuxtjs/partytown',
-    '@nuxtjs/tailwindcss',
-    'nuxt-content-assets',
-    '@nuxtjs/mdc',
-    '@nuxtjs/i18n',
-    '@vueuse/nuxt',
-    'shadcn-nuxt',
-    '@nuxt/fonts',
-    '@nuxt/content',
-    '@nuxt/image',
 
-    '@nuxt/icon',
-    'nuxt-echarts',
-  ],
 
   content: {
     experimental: {
@@ -124,7 +144,8 @@ export default defineNuxtConfig({
   i18n: {
     customRoutes: 'config',
     defaultLocale: 'ru',
-    lazy: true,
+    // restructureDir: 'i18n',
+    // lazy: true,
     routesNameSeparator: '___',
     strategy: 'no_prefix',
 
@@ -134,6 +155,7 @@ export default defineNuxtConfig({
       cookieKey: 'lang',
       useCookie: true,
     },
+
 
     langDir: 'languages',
 

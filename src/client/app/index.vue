@@ -10,6 +10,9 @@ const route = useRoute()
       <p>{{ message }} was loaded.</p>
     </template>
   </NuxtRouteAnnouncer>
+  <ClientOnly>
+    <Toaster />
+  </ClientOnly>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

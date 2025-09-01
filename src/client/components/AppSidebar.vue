@@ -22,134 +22,46 @@ const data = {
     {
       items: [
         {
-          title: 'Installation',
-          url: '#',
+          title: 'Сделки',
+          url: '/deals',
         },
         {
-          title: 'Project Structure',
-          url: '#',
+          title: 'Завершенные',
+          url: '/deals_archive',
         },
       ],
-      title: 'Getting Started',
+      title: 'Сделки',
       url: '#',
     },
     {
       items: [
         {
-          title: 'Routing',
-          url: '#',
-        },
-        {
-          isActive: true,
-          title: 'Data Fetching',
-          url: '#',
-        },
-        {
-          title: 'Rendering',
-          url: '#',
-        },
-        {
-          title: 'Caching',
-          url: '#',
-        },
-        {
-          title: 'Styling',
-          url: '#',
-        },
-        {
-          title: 'Optimizing',
-          url: '#',
-        },
-        {
-          title: 'Configuring',
-          url: '#',
-        },
-        {
-          title: 'Testing',
-          url: '#',
-        },
-        {
-          title: 'Authentication',
-          url: '#',
-        },
-        {
-          title: 'Deploying',
-          url: '#',
-        },
-        {
-          title: 'Upgrading',
-          url: '#',
-        },
-        {
-          title: 'Examples',
+          title: 'Графики',
           url: '#',
         },
       ],
-      title: 'Building Your Application',
-      url: '#',
+      title: 'Аналитика',
+      url: '/analytics',
     },
     {
       items: [
         {
-          title: 'Components',
-          url: '#',
+          title: 'Мои чаты',
+          url: '/chats',
         },
         {
-          title: 'File Conventions',
-          url: '#',
-        },
-        {
-          title: 'Functions',
-          url: '#',
-        },
-        {
-          title: 'next.config.js Options',
-          url: '#',
-        },
-        {
-          title: 'CLI',
-          url: '#',
-        },
-        {
-          title: 'Edge Runtime',
-          url: '#',
-        },
+          title: 'Уведомления',
+          url: '/notifications',
+        }
       ],
-      title: 'API Reference',
+      title: 'Сообщения',
       url: '#',
     },
-    {
-      items: [
-        {
-          title: 'Accessibility',
-          url: '#',
-        },
-        {
-          title: 'Fast Refresh',
-          url: '#',
-        },
-        {
-          title: 'Next.js Compiler',
-          url: '#',
-        },
-        {
-          title: 'Supported Browsers',
-          url: '#',
-        },
-        {
-          title: 'Turbopack',
-          url: '#',
-        },
-      ],
-      title: 'Architecture',
-      url: '#',
-    },
-  ],
-  versions: [
-    '1.0.1',
-    '1.1.0-alpha',
-    '2.0.0-beta1',
-  ],
+  ]
+}
+async function logout() {
+  useCookie('access_token').value = null
+  await navigateTo('/login')
 }
 </script>
 
@@ -161,10 +73,23 @@ const data = {
         :default-version="data.versions[0]"
       /> -->
       <!-- <SearchForm /> -->
-      <Avatar>
-        <AvatarImage src="https://github.com/unovue.png" alt="@unovue" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+      <DropdownMenu>
+        <DropdownMenuTrigger class="self-start">
+          <Avatar>
+            <!-- <AvatarImage src="https://github.com/unovue.png" alt="@unovue" /> -->
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>Billing</DropdownMenuItem>
+          <DropdownMenuItem>Team</DropdownMenuItem>
+          <DropdownMenuItem @click="logout">Logout</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
     </SidebarHeader>
     <SidebarContent>
       <SidebarGroup v-for="item in data.navMain" :key="item.title">

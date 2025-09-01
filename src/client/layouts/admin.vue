@@ -6,11 +6,11 @@ const toggleDark = useToggle(isDark)
 <template>
   <div
     id="__layout"
-    class="flex flex-col items-center justify-center w-full h-full grow dark:text-white"
+    class="flex flex-col items-center justify-center min-h-screen w-full h-full grow dark:text-white"
   >
-    <ClientOnly>
+
       <Button
-        class="absolute border border-gray-300 border-dashed rounded-full dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 top-4 right-4"
+        class="absolute border border-gray-300 border-dashed rounded-full toggle-dark dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 top-4 right-4 z-[9999] text-foreground"
         type="menu"
         size="icon"
         variant="outline"
@@ -23,8 +23,8 @@ const toggleDark = useToggle(isDark)
         <AppSidebar />
         <SidebarInset>
           <header class="flex items-center h-16 gap-2 px-4 border-b shrink-0">
-            <SidebarTrigger class="-ml-1" />
-            <Separator orientation="vertical" class="h-4 mr-2" />
+            <!-- <SidebarTrigger class="-ml-1" /> -->
+            <!-- <Separator orientation="vertical" class="h-4 mr-2" /> -->
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem class="hidden md:block">
@@ -42,7 +42,6 @@ const toggleDark = useToggle(isDark)
           <slot />
         </SidebarInset>
       </SidebarProvider>
-    </ClientOnly>
   </div>
 </template>
 
