@@ -24,18 +24,20 @@ import * as z from "zod"
 // } from "@/client/components/ui/form"
 // import { Input } from "@/client/components/ui/input"
 import { useToast } from '@/client/components/ui/toast/use-toast'
+import type { Deals } from "#build/$rstore-directus-models"
+
 
 const { toast } = useToast()
 
 const formSchema = toTypedSchema(z.object({
   title: z.string().min(2).max(50),
-  description: z.string().min(2).max(50),
+  short_desc: z.string().min(2).max(50).optional(),
 }))
 
 const store = useStore()
 
 function onSubmit(values: any) {
-
+  console.log(values)
   store.Deals.create(values).then((res) => {
     if (res) {
       toast({
@@ -80,7 +82,7 @@ const isOpen = ref(false)
               <FormMessage />
             </FormItem>
           </FormField>
-          <FormField v-slot="{ componentField }" name="description">
+          <FormField v-slot="{ componentField }" name="short_desc">
             <FormItem>
               <FormLabel>Краткое описание</FormLabel>
               <FormControl>

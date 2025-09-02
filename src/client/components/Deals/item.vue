@@ -16,7 +16,9 @@ const { data: stages, loading } = await store.DealStages.queryMany({
 </script>
 <template>
   <Card class="flex flex-col transition cursor-pointer hover:bg-secondary" @click="navigateTo(`/deals/${props.item.id}`)">
-    <CardHeader>{{ props.item.id }} {{ props.item.title }}</CardHeader>
+    <CardHeader>
+      {{ props.item.title }}
+    </CardHeader>
     <CardContent class="grow">{{ props.item.short_desc }}</CardContent>
     <!-- <div v-if="sta ges">{{ stages }}</div> -->
     <CardFooter v-if="!loading" class="flex gap-2">

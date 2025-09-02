@@ -6,6 +6,7 @@ import {
   deleteItem,
   readItem,
   readItems,
+  readUsers,
   readMe,
   realtime,
   refresh,
@@ -79,4 +80,5 @@ export default defineNuxtPlugin(async ({ provide, vueApp }) => {
   provide('isAuthenticated', isAuthenticated);
   provide('refreshToken', refreshToken);
   provide('getSchema', getSchema);
+  provide('readUsers', readUsers)
 });

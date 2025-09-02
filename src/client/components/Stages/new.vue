@@ -1,52 +1,63 @@
 <script setup lang="ts">
 
-import type { DealStages } from '#build/$rstore-directus-models'
+import type { Deals, DealStages } from '#build/$rstore-directus-models'
 import { useToast } from '@/client/components/ui/toast/use-toast'
+import { useForm } from "vee-validate"
 import { toTypedSchema } from "@vee-validate/zod"
 import { h } from "vue"
 import type { ZodObject, ZodType } from 'zod'
 import * as z from "zod"
 
 const props = defineProps<{
-  item: DealStages
+  deal: Deals
 }>()
 
 const emits = defineEmits(['close'])
 const { toast } = useToast()
+const store = useStore()
 
 
 const { $isAuthenticated } = useNuxtApp()
 const user = await $isAuthenticated()
 const formSchema = toTypedSchema(z.object({
-  deal: z.number(),
-  content: z.string().optional(),
-  contracter: z.string().optional(),
+  deal: z.string(),
+  // content: z.string().optional(),
+  // contracter: z.string().optional(),
   short_desc: z.string().optional(),
   title: z.string().min(2).max(50),
 }))
 
-const store = useStore()
+const { isFieldDirty, handleSubmit } = useForm({
+  validationSchema: formSchema,
+  initialValues: {
+    deal: props.deal.id
+  }
+})
 
-function onSubmit(values: any) {
 
-  store.Deals.create(values).then((res) => {
+const onSubmit = handleSubmit((values) => {
+  const v = {
+    ...values,
+    deal: props.deal.id,}
+  store.DealStages.create(v).then((res) => {
     if (res) {
       toast({
         title: "You submitted the following values:",
         description: h("pre", { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" }, h("code", { class: "text-white" }, JSON.stringify(values, null, 2))),
       })
+      emits('close')
     }
   })
-}
+})
 
 </script>
 <template>
   <Card>
     <CardHeader>Новый этап</CardHeader>
     {{ user }}
+    {{ props.deal }}
     <CardContent>
-      <Form v-slot="{ handleSubmit }" as="" keep-values :validation-schema="formSchema">
-        <form id="newStageForm" @submit="handleSubmit($event, onSubmit)" class="space-y-6">
+        <form id="newStageForm" @submit="onSubmit" class="space-y-6">
           <FormField v-slot="{ componentField }" name="title">
             <FormItem>
               <FormLabel>Название этапа</FormLabel>
@@ -72,7 +83,6 @@ function onSubmit(values: any) {
             </FormItem>
           </FormField>
         </form>
-      </Form>
     </CardContent>
     <CardFooter>
       <div class="flex gap-4">

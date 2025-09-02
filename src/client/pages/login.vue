@@ -57,7 +57,7 @@ const onSubmit = handleSubmit((values) => {
   <CardContent>
     <form class="w-full space-y-6" @submit="onSubmit">
       <FormField v-slot="{ componentField }" name="email" :validate-on-blur="!isFieldDirty">
-        <FormItem v-auto-animate>
+        <FormItem>
           <FormLabel>Username</FormLabel>
           <FormControl>
             <Input type="text" placeholder="shadcn" v-bind="componentField" />
@@ -69,7 +69,7 @@ const onSubmit = handleSubmit((values) => {
         </FormItem>
       </FormField>
       <FormField v-slot="{ componentField }" name="password" :validate-on-blur="!isFieldDirty">
-        <FormItem v-auto-animate>
+        <FormItem>
           <FormLabel>Password</FormLabel>
           <FormControl>
             <Input type="password" placeholder="shadcn"  autocomplete="on" v-bind="componentField" />
