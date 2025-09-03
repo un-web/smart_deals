@@ -40,6 +40,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     'nuxt-echarts',
     'nuxt-auth-utils',
+    // 'nuxt-directus',
   ],
 
   compatibilityDate: '2024-08-15',

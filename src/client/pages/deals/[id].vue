@@ -76,11 +76,13 @@ const { data: customer, loading: loadingCustomer } = await store.directus_users.
         <div v-html="deal?.content"></div>
       </CollapsibleContent>
     </Collapsible>
-    <div class="flex flex-col gap-2" v-if="!loadingStages">
-      <h1>Этапы сделки</h1>
-      <Button variant="outline" @click="toggleAddStageMode(true)">
-        <Icon name="lucide:plus" class="w-4 h-4 mr-1" /> Добавить этап
-      </Button>
+    <div class="flex flex-col gap-4" v-if="!loadingStages">
+      <div class="flex items-center justify-between">
+        <h1>Этапы сделки</h1>
+        <Button variant="outline" @click="toggleAddStageMode(true)">
+          <Icon name="lucide:plus" class="w-4 h-4 mr-1" /> Добавить этап
+        </Button>
+      </div>
       <StagesCollapsibleItem v-for="stage, si in stages" :key="stage.id" :item="stage" :order="si + 1" />
     </div>
     <Skeleton v-else class="w-full h-20 max-w-sm"></Skeleton>

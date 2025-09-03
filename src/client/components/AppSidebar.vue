@@ -26,6 +26,10 @@ const data = {
           url: '/deals',
         },
         {
+          title: 'Черновики',
+          url: '/deals_archive',
+        },
+        {
           title: 'Завершенные',
           url: '/deals_archive',
         },

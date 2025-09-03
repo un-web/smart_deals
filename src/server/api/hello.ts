@@ -20,6 +20,7 @@ export default defineEventHandler(async (evt) => {
   }
   const runtimeConfig = useRuntimeConfig(evt);
   const directus = createDirectus(runtimeConfig.directusUrl).with(authentication());
+
   // const { access_token: accessToken } = await createDirectus(
   //   runtimeConfig.directusUrl
   // )

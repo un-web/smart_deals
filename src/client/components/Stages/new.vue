@@ -54,15 +54,13 @@ const onSubmit = handleSubmit((values) => {
 <template>
   <Card>
     <CardHeader>Новый этап</CardHeader>
-    {{ user }}
-    {{ props.deal }}
     <CardContent>
         <form id="newStageForm" @submit="onSubmit" class="space-y-6">
           <FormField v-slot="{ componentField }" name="title">
             <FormItem>
               <FormLabel>Название этапа</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="shadcn" v-bind="componentField" />
+                <Input type="text" placeholder="Наименование этапа" v-bind="componentField" />
               </FormControl>
               <!-- <FormDescription>
                 This is your public display name.
@@ -74,7 +72,7 @@ const onSubmit = handleSubmit((values) => {
             <FormItem>
               <FormLabel>Краткое описание</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="shadcn" v-bind="componentField" />
+                <Input type="text" placeholder="Краткое описание" v-bind="componentField" />
               </FormControl>
               <!-- <FormDescription>
                 This is your public display name.

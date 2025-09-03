@@ -7,6 +7,7 @@ import {
   readItem,
   readItems,
   readUsers,
+
   readMe,
   realtime,
   refresh,
@@ -16,9 +17,10 @@ import {
   type AuthenticationStorage,
   type DirectusClient,
   schemaSnapshot,
+  type RestClient,
 } from "@directus/sdk";
 
-type Directus = DirectusClient<unknown> & AuthenticationClient<unknown>;
+type Directus = DirectusClient<unknown> & AuthenticationClient<unknown> & RestClient<unknown>;
 
 declare module "#app" {
   interface NuxtApp {
@@ -79,6 +81,4 @@ export default defineNuxtPlugin(async ({ provide, vueApp }) => {
   provide("directus", directus);
   provide('isAuthenticated', isAuthenticated);
   provide('refreshToken', refreshToken);
-  provide('getSchema', getSchema);
-  provide('readUsers', readUsers)
 });

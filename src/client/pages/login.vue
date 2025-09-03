@@ -58,7 +58,7 @@ const onSubmit = handleSubmit((values) => {
     <form class="w-full space-y-6" @submit="onSubmit">
       <FormField v-slot="{ componentField }" name="email" :validate-on-blur="!isFieldDirty">
         <FormItem>
-          <FormLabel>Username</FormLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl>
             <Input type="text" placeholder="shadcn" v-bind="componentField" />
           </FormControl>
@@ -70,7 +70,7 @@ const onSubmit = handleSubmit((values) => {
       </FormField>
       <FormField v-slot="{ componentField }" name="password" :validate-on-blur="!isFieldDirty">
         <FormItem>
-          <FormLabel>Password</FormLabel>
+          <FormLabel>Пароль</FormLabel>
           <FormControl>
             <Input type="password" placeholder="shadcn"  autocomplete="on" v-bind="componentField" />
           </FormControl>
@@ -84,6 +84,7 @@ const onSubmit = handleSubmit((values) => {
         Submit
       </Button>
     </form>
+    <div>Нет учетной записи? <a href="/signup">Зарегистрироваться</a></div>
   </CardContent>
 </Card>
 </template>

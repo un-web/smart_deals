@@ -4,7 +4,7 @@ import { useForm } from "vee-validate"
 import * as z from "zod"
 import { useToast } from '@/client/components/ui/toast/use-toast'
 import type { Deals } from '#build/$rstore-directus-models';
-import { readItems, readUsers } from '@directus/sdk';
+import { readItems, readRoles, readRole, readUsers,readMe } from '@directus/sdk';
 
 const props = defineProps<{
   deal: Deals
@@ -20,9 +20,36 @@ const formSchema = toTypedSchema(z.object({
 const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: formSchema,
 })
+const me = await $directus.request(readMe())
 
-const users = await $directus.request(readUsers())
+async function getRoleByName(roleName:string) {
+  try {
+    // First, get all roles to find the one with matching name
+    const allRoles = await $directus.request(readRoles());
+    const targetRole = allRoles.find(role => role.name === roleName);
+console.log(targetRole)
+    if (targetRole) {
+      // Now fetch the complete role details using its ID
+      const roleDetails = await $directus.request(readRole(targetRole.id));
+      return roleDetails;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching role:', error);
+    throw error;
+  }
+}
 
+const customerRole = await getRoleByName('Сustomer')
+const users = await $directus.request(readUsers(customerRole && me ? {
+  filter:  {
+    id: {
+      _in: customerRole.users,
+      _neq: me.id
+    },
+  }
+} : {enabled:false}
+))
 
 const onSubmit = handleSubmit((values) => {
   store.Deals.update(values).then((res) => {
@@ -54,6 +81,7 @@ const onSubmit = handleSubmit((values) => {
 
     </DialogTrigger>
     <DialogContent class="sm:max-w-[425px]">
+
       <DialogHeader>
         <DialogTitle>Выбрать заказчика</DialogTitle>
         <DialogDescription>
@@ -61,8 +89,8 @@ const onSubmit = handleSubmit((values) => {
         </DialogDescription>
       </DialogHeader>
 
-      <form id="dialogForm" @submit="onSubmit" class="space-y-6" v-if="!loading">
-        <!-- {{ users }} -->
+      <form id="dialogForm" @submit="onSubmit" class="space-y-6" >
+
         <FormField v-slot="{ componentField }" name="customer">
           <FormItem>
             <FormLabel>Пользователь</FormLabel>
