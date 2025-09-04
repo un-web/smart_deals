@@ -2,7 +2,7 @@ import { readMe } from "@directus/sdk";
 
 export default defineNuxtRouteMiddleware(async (to, _from) => {
   const { $directus } = useNuxtApp();
- 
+
   if (to.path.startsWith("/login") || to.path.startsWith("/register")) {
     return;
   }
@@ -19,7 +19,7 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
       return me
     } catch (error) {
       authCookie.value = null
-      
+
       console.error(error);
       return false;
     }

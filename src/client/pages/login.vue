@@ -38,7 +38,7 @@ const onSubmit = handleSubmit((values) => {
     title: "You submitted the following values:",
     description: h("pre", { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" }, h("code", { class: "text-white" }, JSON.stringify(values, null, 2))),
   })
-  $fetch('/hello', {
+  $fetch('/api/hello', {
     method: 'POST',
     body: values
   })

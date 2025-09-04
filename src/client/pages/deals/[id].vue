@@ -13,12 +13,12 @@ const store = useStore()
 const { data: deal, loading: loadingDeal } = await store.Deals.queryFirst(route.params.id as string)
 const { data: stages, loading: loadingStages } = await store.DealStages.liveQueryMany({
   filter: {
-    deal: {
+    deal_id: {
       _eq: deal.value?.id,
     },
   }
 })
-const { data: customer, loading: loadingCustomer } = await store.directus_users.queryFirst(() => deal.value?.customer ? deal.value?.customer : { enabled: false })
+
 </script>
 
 <template>
@@ -48,7 +48,7 @@ const { data: customer, loading: loadingCustomer } = await store.directus_users.
           <CardDescription>{{ deal?.status }}</CardDescription>
         </CardContent>
       </Card>
-      <DealsAddCustomer v-if="!deal?.customer" :deal="deal" />
+      <DealsAddCustomer v-if="!deal?.customer_id" :deal="deal" />
 
       <Card class="flex flex-col" v-else>
         <CardHeader>

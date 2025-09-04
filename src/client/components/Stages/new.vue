@@ -38,7 +38,7 @@ const { isFieldDirty, handleSubmit } = useForm({
 const onSubmit = handleSubmit((values) => {
   const v = {
     ...values,
-    deal: props.deal.id,}
+    deal_id: props.deal.id,}
   store.DealStages.create(v).then((res) => {
     if (res) {
       toast({

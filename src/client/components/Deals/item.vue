@@ -5,7 +5,7 @@ const props = defineProps<{ item: Deals }>()
 const store = useStore()
 const { data: stages, loading } = await store.DealStages.queryMany({
   filter: {
-    deal: {
+    deal_id: {
       _eq: props.item.id,
     },
   },
