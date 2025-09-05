@@ -1,35 +1,33 @@
 import { readMe } from "@directus/sdk";
+import { useAuth } from "../composables/useAuth";
 
 export default defineNuxtRouteMiddleware(async (to, _from) => {
-  const { $directus } = useNuxtApp();
 
-  if (to.path.startsWith("/login") || to.path.startsWith("/register")) {
-    return;
+  console.log('auth middleware');
+  // const { isAuthenticated, user, isLoading } = useAuth();
+  const authCookie = useCookie('directus_auth');
+  console.log('authCookie', authCookie.value);
+  // Skip authentication for public routes
+  if (to.meta.public) {
+    return true;
   }
-  const authCookie = useCookie("access_token");
-  if (authCookie.value) {
-    $directus.setToken(authCookie.value);
+
+  // Check if user is authenticated
+  if (!authCookie.value) {
+    return navigateTo('/login', { replace: true });
   }
-  const isAuthenticated = async () => {
-    try {
 
-      const me = await $directus.request(
-        readMe(),
-      );
-      return me
-    } catch (error) {
-      authCookie.value = null
+  // Optional: Check for specific permissions
+  // if (to.meta.requiresPermission) {
+  //   const hasPermission = await checkPermission(
+  //     currentUser.value,
+  //     to.meta.requiresPermission
+  //   );
+  //   if (!hasPermission) {
+  //     return navigateTo('/403', { replace: true });
+  //   }
+  // }
 
-      console.error(error);
-      return false;
-    }
-  };
-  const authenticated = await isAuthenticated();
-
-  if (!authenticated || !authCookie.value) {
-
-    return navigateTo("/login");
-  }
-  return
+  return true;
 
 });

@@ -20,9 +20,10 @@ import { useAuth } from "../composables/useAuth"
 
 
 definePageMeta({
-  layout: 'default'
+  layout: 'default',
+  // middleware: ['auth'],
 })
-
+const router = useRouter()
 const credentials = ref<Credential>()
 
 const formSchema = toTypedSchema(z.object({
@@ -42,11 +43,12 @@ const onSubmit = handleSubmit((values) => {
     description: h("pre", { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" }, h("code", { class: "text-white" }, JSON.stringify(values, null, 2))),
   })
   auth.login(values).then((res) => {
-    if (res.success) {
-      navigateTo('/deals')
+    console.log(res)
+    if (res) {
+      router.push('/deals')
     }
   })
-  
+
 })
 </script>
 

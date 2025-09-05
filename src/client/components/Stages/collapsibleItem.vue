@@ -23,7 +23,7 @@ const removeOpen = ref(false)
       </div>
       <div class="flex items-center gap-2">
         <AlertDialog v-model:open="removeOpen">
-          <AlertDialogTrigger>
+          <AlertDialogTrigger as-child>
             <Button variant="ghost" size="sm" class="p-0 w-9">
               <Icon name="lucide:trash" class="w-4 h-4" />
             </Button>

@@ -13,6 +13,7 @@ import {
   type SidebarProps,
   SidebarRail,
 } from '@/client/components/ui/sidebar'
+import { useAuth } from '../composables/useAuth';
 
 const props = defineProps<SidebarProps>()
 
@@ -67,6 +68,8 @@ async function logout() {
   useCookie('access_token').value = null
   await navigateTo('/login')
 }
+
+const auth = useAuth()
 </script>
 
 <template>
@@ -83,6 +86,7 @@ async function logout() {
             <!-- <AvatarImage src="https://github.com/unovue.png" alt="@unovue" /> -->
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
+          {{ auth.user.value?.email }}
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -102,7 +106,7 @@ async function logout() {
           <SidebarMenu>
             <SidebarMenuItem v-for="childItem in item.items" :key="childItem.title">
               <SidebarMenuButton as-child :is-active="childItem.isActive">
-                <a :href="childItem.url">{{ childItem.title }}</a>
+                <NuxtLink :to="childItem.url">{{ childItem.title }}</NuxtLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

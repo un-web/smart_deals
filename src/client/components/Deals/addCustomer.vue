@@ -7,6 +7,7 @@ import { useToast } from '@/client/components/ui/toast/use-toast'
 import type { directus_users, Deals } from '#build/$rstore-directus-models';
 import { readItems, readRoles, readRole, readUsers, readMe } from '@directus/sdk';
 import { getRoleByName } from '~/client/utils';
+import {find} from 'remeda'
 
 const props = defineProps<{
   deal: Deals
@@ -21,15 +22,15 @@ const formSchema = toTypedSchema(z.object({
   invitation_token: z.string(),
 }))
 
-const { isFieldDirty, handleSubmit, setFieldValue,values } = useForm({
+const { isFieldDirty, handleSubmit, setFieldValue, values } = useForm({
   validationSchema: formSchema,
 })
 
-const customer = asyncComputed(()=>
- $fetch('/api/user', {
-  method: 'POST',
-  body: {id:props.deal.customer_id}
-}))
+// const customer = asyncComputed(()=>
+//  $fetch('/api/user', {
+//   method: 'POST',
+//   body: {id:props.deal.customer_id}
+// }))
 
 const customerRole = await getRoleByName('Сustomer')
 
@@ -37,6 +38,9 @@ const users = await $fetch('/api/users', {
   method: 'POST',
   body: { role: customerRole }
 })
+console.log(users)
+// const users = await store.U
+const customer = computed(() => find(users, (user)=>user.id === props.deal.customer_id))
 
 // Function to generate and set invitation token
 const generateInvitationToken = () => {
@@ -61,6 +65,15 @@ const onSubmit = handleSubmit((values) => {
     ...values
   }).then((res) => {
     if (res) {
+      store.Notifications.create({
+        type: 'deal_invitation',
+        status: 'published',
+        user_id: props.deal.customer_id,
+        deal_id: props.deal.id,
+        title: 'Приглашение в сделку',
+        is_read: false,
+        message: `Вас пригласили в сделку ${props.deal.title}`
+      })
       toast({
         title: "You submitted the following values:",
         description: h("pre", { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" }, h("code", { class: "text-white" }, JSON.stringify(values, null, 2))),
@@ -88,15 +101,14 @@ const onSubmit = handleSubmit((values) => {
               v-else-if="props.deal.customer_id && props.deal.invitation_token && !props.deal.invitation_accepted">Приглашение
               отправлено</template>
             <template
-              v-else-if="props.deal.customer_id && customer && props.deal.invitation_accepted">{{customer.first_name}}
-              {{customer.last_name}}</template>
+              v-else-if="props.deal.customer_id && customer && props.deal.invitation_accepted">{{ customer.first_name }}
+              {{ customer.last_name }}</template>
           </CardDescription>
         </CardContent>
       </Card>
     </DialogTrigger>
     <DialogContent class="sm:max-w-[425px]">
 
-      <template v-if="!props.deal.customer_id && !props.deal.invitation_token">
         <DialogHeader>
           <DialogTitle>Выбрать заказчика</DialogTitle>
           <DialogDescription>
@@ -145,7 +157,7 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
         </form>
-      </template>
+
       <DialogFooter>
         <Button type="submit" form="dialogForm">
           Save changes

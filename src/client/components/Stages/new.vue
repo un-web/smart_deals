@@ -17,8 +17,7 @@ const { toast } = useToast()
 const store = useStore()
 
 
-const { $isAuthenticated } = useNuxtApp()
-const user = await $isAuthenticated()
+
 const formSchema = toTypedSchema(z.object({
   deal: z.string(),
   // content: z.string().optional(),

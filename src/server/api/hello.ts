@@ -22,7 +22,7 @@ export default defineEventHandler(async (evt) => {
     return sendError(evt, new Error("FUUUCK!"));
   }
   const runtimeConfig = useRuntimeConfig(evt);
-  const directus = createDirectus(runtimeConfig.directusUrl).with(authentication()).with(rest());
+  const directus = createDirectus(runtimeConfig.directusUrl).with(authentication('session')).with(rest());
 
   // const { access_token: accessToken } = await createDirectus(
   //   runtimeConfig.directusUrl
@@ -30,23 +30,26 @@ export default defineEventHandler(async (evt) => {
   //   .with(authentication())
   //   .login({email, password});
 
-  const { access_token: accessToken} = await directus
+  const res = await directus
     .login({ email, password });
-
-  if (!accessToken) {
-    return sendError(evt, new Error("FUUUUUUUUUUUUKKKKK!!"));
-  }
-  directus.setToken(accessToken);
+  console.log(res);
+  // if (!accessToken) {
+  //   return sendError(evt, new Error("FUUUUUUUUUUUUKKKKK!!"));
+  // }
   // directus.setToken(accessToken);
-  setCookie(evt, "access_token", accessToken);
-  const me = await directus.request(readMe());
-  const user = await directus.request(readUser(me.id)) as DirectusUser;
-  console.log(user);
-  // await setUserSession(evt, {
-  //   loggedIn: true,
-  //   user: {
-  //     accessToken
-  //   }
-  // })
-  return { access_token: accessToken, user };
+  // // directus.setToken(accessToken);
+  // setCookie(evt, "access_token", accessToken);
+
+  // if(refreshToken) setCookie(evt, "refresh_token", refreshToken);
+
+  // const me = await directus.request(readMe());
+  // const user = await directus.request(readUser(me.id)) as DirectusUser;
+  // console.log(user);
+  // // await setUserSession(evt, {
+  // //   loggedIn: true,
+  // //   user: {
+  // //     accessToken
+  // //   }
+  // // })
+  // return { access_token: accessToken, user, refresh_token: refreshToken};
 });

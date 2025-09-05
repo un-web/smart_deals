@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useAuth } from '~/client/composables/useAuth'
+
 definePageMeta({
   // set custom layout
   layout: 'admin',
-  middleware: ['auth'],
+  // middleware: ['auth'],
 })
 const { t } = useI18n()
 function add()  {
@@ -14,12 +16,12 @@ function add()  {
 }
 const store = useStore()
 const { data: deals, loading } = await store.Deals.queryMany()
-
+const auth = useAuth()
 
 </script>
 
 <template>
-  <div class="grid grid-cols-12 gap-4 p-4">
+  <div class="grid grid-cols-12 gap-4 p-4" v-if="auth.isAuthenticated">
     <DealsList  v-if="!loading" :items="deals" class="col-span-12"/>
     <DealsNew />
   </div>

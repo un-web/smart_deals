@@ -3,7 +3,7 @@ import { Card, CardDescription, DealsAddCustomer, Skeleton, StagesCollapsibleIte
 import { useRoute } from 'vue-router'
 definePageMeta({
   layout: 'admin',
-  middleware: ['auth'],
+  // middleware: ['auth'],
 })
 const [addStageMode, toggleAddStageMode] = useToggle(false)
 
@@ -18,6 +18,7 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
     },
   }
 })
+
 
 </script>
 
@@ -48,16 +49,17 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
           <CardDescription>{{ deal?.status }}</CardDescription>
         </CardContent>
       </Card>
-      <DealsAddCustomer v-if="!deal?.customer_id" :deal="deal" />
+      <DealsAddCustomer v-if="!deal.customer_id || !deal.invitation_token" :deal="deal" />
+      <DealsViewCustomer v-else :deal="deal" />
 
-      <Card class="flex flex-col" v-else>
+      <!-- <Card class="flex flex-col" v-else>
         <CardHeader>
           <CardTitle>{{ customer?.first_name }} {{ customer?.last_name }}</CardTitle>
         </CardHeader>
         <CardContent class="flex flex-col grow">
           <CardDescription>{{ customer?.email}}</CardDescription>
         </CardContent>
-      </Card>
+      </Card> -->
 
     </div>
     <Collapsible class="space-y-2 w-min" v-if="deal?.content">
