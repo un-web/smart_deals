@@ -51,16 +51,13 @@ const { isFieldDirty, handleSubmit } = useForm({
 
 const onSubmit = handleSubmit( async (values) => {
   console.log(values)
-  $fetch('/api/signup', {
+  await $fetch('/api/signup', {
     method: 'POST',
     body: values
+  }).then(()=>{
+
+    navigateTo('/')
   })
-    .then(async (res) => {
-      if (res) {
-        await navigateTo('/')
-      }
-    })
-    .catch((error) => alert(error))
 })
 </script>
 
