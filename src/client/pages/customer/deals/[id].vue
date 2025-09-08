@@ -23,36 +23,12 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
 </script>
 
 <template>
-  
+
   <div class="flex flex-col gap-6 p-4">
-    <h1>Я ЗАКАЗЧИК</h1>
     <div class="grid grid-cols-3 gap-4" v-if="deal">
-      <Card class="flex flex-col">
-        <CardHeader>
-          <CardTitle>
-            <div class="flex items-center justify-between">{{ deal?.title }}
-              <Icon name="lucide:info" class="w-5 h-5" />
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent class="flex flex-col grow">
-          <CardDescription>{{ deal?.short_desc }}</CardDescription>
-        </CardContent>
-      </Card>
-      <Card class="flex flex-col">
-        <CardHeader>
-          <CardTitle>
-            <div class="flex items-center justify-between">Текущий статус сделки
-              <Icon name="lucide:tag" class="w-5 h-5" />
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent class="flex flex-col grow">
-          <CardDescription>{{ deal?.status }}</CardDescription>
-        </CardContent>
-      </Card>
-     
-      <DealsViewContracter :deal="deal" />
+      <DealsDetails :deal="deal"/>
+      <DealsStatus :deal="deal"/>
+      <DealsContracter :deal="deal" />
 
      </div>
     <Collapsible class="space-y-2 w-min" v-if="deal?.content">
@@ -75,12 +51,8 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
       <div class="flex flex-col gap-4" >
         <div class="flex items-center justify-between">
           <h1>Этапы сделки</h1>
-          <!-- <Button variant="outline" @click="toggleAddStageMode(true)">
-            <Icon name="lucide:plus" class="w-4 h-4 mr-1" /> Добавить этап
-          </Button> -->
         </div>
         <StagesCustomerView :items="stages" />
-
       </div>
     </template>
     <Skeleton v-else class="w-full h-20 max-w-sm"></Skeleton>

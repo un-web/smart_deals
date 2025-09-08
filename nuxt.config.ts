@@ -8,6 +8,8 @@ const clientDir = join(srcDir, 'client')
 const serverDir = join(srcDir, 'server')
 const componentsDir = join(clientDir, 'components')
 
+console.log(process.env.DIRECTUS_ADMIN_TOKEN)
+
 export default defineNuxtConfig({
   // ssr: false,
    // Runtime Configuration

@@ -5,9 +5,9 @@ const props = defineProps<{ items: DealStages[] }>();
 const isOpen = ref(false);
 const store = useStore()
 
-const currentStageIndex=computed(() => 
+const currentStageIndex=computed(() =>
   findIndex(props.items, (stage) => stage.status === 'in_progress'))
-  
+
 console.log(props.items)
 const removeOpen = ref(false)
 
@@ -54,19 +54,27 @@ const statuses = {
 </script>
 
 <template>
-   <Accordion type="single" class="w-full flex flex-col" collapsible>
-    <AccordionItem v-for="item,index in props.items" :key="item.id" :value="item.id"  :disabled="item.status === 'accepted'">
-      <AccordionTrigger class="px-4 font-normal" >
-        <div class="flex justify-start items-center gap-x-2">
-          <div :class="statuses[item.status].bg" class="rounded-full w-8 h-8 flex items-center justify-center">
+  <Accordion type="single" class="flex flex-col w-full" collapsible>
+    <AccordionItem v-for="item,index in props.items" :key="item.id" :value="item.id"
+      :disabled="item.status === 'accepted'">
+      <AccordionTrigger class="px-4 font-normal">
+        <div class="flex items-center justify-start gap-x-4">
+          <!-- <div :class="statuses[item.status].bg" class="flex items-center justify-center w-8 h-8 rounded-full">
             <Icon :name="statuses[item.status].icon" class="w-4 h-4" />
-          </div>
-          {{index+1}}. {{ item.title }}
+          </div> -->
+          <span>{{index+1}}. {{ item.title }}</span>
+          <!-- <Badge>{{ item.status }}</Badge> -->
         </div>
       </AccordionTrigger>
-      <AccordionContent class="px-4">
-        {{ item.status }}
-        <StagesFiles :item="item" />
+      <AccordionContent class="flex flex-col gap-8 px-4">
+        <div class="flex flex-col gap-2">
+          <h1>Файлы заказчика</h1>
+          <StagesCustomerFiles :item="item" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <h1>Файлы подрядчика</h1>
+          <StagesContracterFiles :item="item" />
+        </div>
       </AccordionContent>
     </AccordionItem>
   </Accordion>

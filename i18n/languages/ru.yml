@@ -8,3 +8,13 @@ pages:
   users:
     title: Пользователи
     welcome: Добро пожаловать на страницу пользователей
+
+deals:
+  title: Сделки
+  welcome: Добро пожаловать на страницу сделок
+  status:
+    draft: Черновик
+    pending_start: Ожидает начала
+    active: В работе
+    completed: Завершена
+    cancelled: Отменена

@@ -39,20 +39,10 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
           <CardDescription>{{ deal?.short_desc }}</CardDescription>
         </CardContent>
       </Card>
-      <Card class="flex flex-col">
-        <CardHeader>
-          <CardTitle>
-            <div class="flex items-center justify-between">Текущий статус сделки
-              <Icon name="lucide:tag" class="w-5 h-5" />
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent class="flex flex-col grow">
-          <CardDescription>{{ deal?.status }}</CardDescription>
-        </CardContent>
-      </Card>
+      <DealsStatus :deal="deal" />
+
       <DealsAddCustomer v-if="!deal.customer_id || !deal.invitation_token" :deal="deal" />
-      <DealsViewCustomer v-else :deal="deal" />
+      <DealsCustomer v-else :deal="deal" />
 
       <!-- <Card class="flex flex-col" v-else>
         <CardHeader>
