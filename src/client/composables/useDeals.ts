@@ -1,11 +1,9 @@
 import { readItems } from "@directus/sdk";
 
 export const useDeals = () => {
-  const { $directus } = useNuxtApp();
   const store = useStore()
 
   const createDraft = async (dealData: any) => {
-    const { $directus } = useNuxtApp();
     return await store.Deals.create({
       ...dealData
     })

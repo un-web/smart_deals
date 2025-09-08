@@ -25,10 +25,11 @@ import * as z from "zod"
 // import { Input } from "@/client/components/ui/input"
 import { useToast } from '@/client/components/ui/toast/use-toast'
 import type { Deals } from "#build/$rstore-directus-models"
+import { useAuth } from "~/client/composables/useAuth"
 
 
 const { toast } = useToast()
-
+const {user} = useAuth()
 const formSchema = toTypedSchema(z.object({
   title: z.string().min(2).max(50),
   short_desc: z.string().min(2).max(50).optional(),
@@ -38,7 +39,8 @@ const store = useStore()
 
 function onSubmit(values: any) {
   console.log(values)
-  store.Deals.create(values).then((res) => {
+  if(!user.value) return
+  store.Deals.create({...values,executor_id: user.value.id}).then((res) => {
     if (res) {
       toast({
         title: "You submitted the following values:",

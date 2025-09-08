@@ -64,12 +64,12 @@ const data = {
     },
   ]
 }
+const auth=useAuth()
 async function logout() {
-  useCookie('access_token').value = null
+  await auth.logout()
   await navigateTo('/login')
 }
 
-const auth = useAuth()
 </script>
 
 <template>

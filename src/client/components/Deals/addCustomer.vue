@@ -8,13 +8,14 @@ import type { directus_users, Deals } from '#build/$rstore-directus-models';
 import { readItems, readRoles, readRole, readUsers, readMe } from '@directus/sdk';
 import { getRoleByName } from '~/client/utils';
 import {find} from 'remeda'
+import { useAuth } from '~/client/composables/useAuth';
 
 const props = defineProps<{
   deal: Deals
 }>()
 const store = useStore()
 const { toast } = useToast()
-
+const auth = useAuth()
 const [addCustomerMode, toggleAddCustomerMode] = useToggle(false)
 
 const formSchema = toTypedSchema(z.object({
@@ -32,13 +33,16 @@ const { isFieldDirty, handleSubmit, setFieldValue, values } = useForm({
 //   body: {id:props.deal.customer_id}
 // }))
 
-const customerRole = await getRoleByName('Сustomer')
-
-const users = await $fetch('/api/users', {
-  method: 'POST',
-  body: { role: customerRole }
+const customerRole = await auth.getRoleByName('Сustomer')
+const roles = await auth.getRoles()
+const users = await auth.getUsers({
+  filter: {
+    role: {
+      _eq: roles['Customer'].id
+    }
+  }
 })
-console.log(users)
+console.log('users',users)
 // const users = await store.U
 const customer = computed(() => find(users, (user)=>user.id === props.deal.customer_id))
 

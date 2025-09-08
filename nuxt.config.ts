@@ -11,6 +11,7 @@ const componentsDir = join(clientDir, 'components')
 export default defineNuxtConfig({
   // ssr: false,
    // Runtime Configuration
+  //  ssr:false,
   runtimeConfig: {
     directusUrl: process.env.DIRECTUS_URL || "http://localhost:8055",
     directusAdminToken: process.env.DIRECTUS_ADMIN_TOKEN,

@@ -24,6 +24,8 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
 
 <template>
   <div class="flex flex-col gap-6 p-4">
+    <h1>Я ПОДРЯДЧИК</h1>
+
     <div class="grid grid-cols-3 gap-4" v-if="deal">
       <Card class="flex flex-col">
         <CardHeader>

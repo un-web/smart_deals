@@ -23,7 +23,9 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
 </script>
 
 <template>
+  
   <div class="flex flex-col gap-6 p-4">
+    <h1>Я ЗАКАЗЧИК</h1>
     <div class="grid grid-cols-3 gap-4" v-if="deal">
       <Card class="flex flex-col">
         <CardHeader>
@@ -49,19 +51,10 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
           <CardDescription>{{ deal?.status }}</CardDescription>
         </CardContent>
       </Card>
-      <DealsAddCustomer v-if="!deal.customer_id || !deal.invitation_token" :deal="deal" />
-      <DealsViewCustomer v-else :deal="deal" />
+     
+      <DealsViewContracter :deal="deal" />
 
-      <!-- <Card class="flex flex-col" v-else>
-        <CardHeader>
-          <CardTitle>{{ customer?.first_name }} {{ customer?.last_name }}</CardTitle>
-        </CardHeader>
-        <CardContent class="flex flex-col grow">
-          <CardDescription>{{ customer?.email}}</CardDescription>
-        </CardContent>
-      </Card> -->
-
-    </div>
+     </div>
     <Collapsible class="space-y-2 w-min" v-if="deal?.content">
       <div class="flex items-center justify-between space-x-4">
         <h4 class="text-sm font-semibold whitespace-nowrap">
@@ -78,15 +71,18 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
         <div v-html="deal?.content"></div>
       </CollapsibleContent>
     </Collapsible>
-    <div class="flex flex-col gap-4" v-if="!loadingStages">
-      <div class="flex items-center justify-between">
-        <h1>Этапы сделки</h1>
-        <Button variant="outline" @click="toggleAddStageMode(true)">
-          <Icon name="lucide:plus" class="w-4 h-4 mr-1" /> Добавить этап
-        </Button>
+    <template v-if="!loadingStages">
+      <div class="flex flex-col gap-4" >
+        <div class="flex items-center justify-between">
+          <h1>Этапы сделки</h1>
+          <!-- <Button variant="outline" @click="toggleAddStageMode(true)">
+            <Icon name="lucide:plus" class="w-4 h-4 mr-1" /> Добавить этап
+          </Button> -->
+        </div>
+        <StagesCustomerView :items="stages" />
+
       </div>
-      <StagesCollapsibleItem v-for="stage, si in stages" :key="stage.id" :item="stage" :order="si + 1" />
-    </div>
+    </template>
     <Skeleton v-else class="w-full h-20 max-w-sm"></Skeleton>
     <template v-if="deal">
       <StagesNew v-if="addStageMode" @close="toggleAddStageMode(false)" :deal="deal" />

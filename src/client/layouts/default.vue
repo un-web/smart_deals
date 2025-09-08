@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { useAuth } from '../composables/useAuth';
+
 // const isDark = useDark()
 // const toggleDark = useToggle(isDark)
+const auth = useAuth()
+await auth.initializeAuth()
 </script>
 
 <template>
