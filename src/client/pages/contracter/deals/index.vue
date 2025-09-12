@@ -27,13 +27,13 @@ function add()  {
   // })
   navigateTo('/deals/new')
 }
+const DealsItem = resolveComponent('DealsItem')
+
 </script>
 
 <template>
-  <div class="grid grid-cols-12 gap-4 p-4" v-if="auth.isAuthenticated">   
-    
-      <DealsList  v-if="!loading" :items="deals" class="col-span-12"/>
+  <div class="grid grid-cols-12 gap-4 p-4" v-if="auth.isAuthenticated">
+      <DealsList  v-if="!loading" :items="deals" class="col-span-12" :component="DealsItem"/>
       <DealsNew />
-   
   </div>
 </template>

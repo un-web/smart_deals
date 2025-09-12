@@ -1,3 +1,4 @@
+import type { Deals } from "#build/$rstore-directus-models";
 import { readItems } from "@directus/sdk";
 
 export const useDeals = () => {
@@ -23,31 +24,39 @@ export const useDeals = () => {
       [field]: true
     })
 
+    // Отправляем уведомление другому участнику
+    await sendConfirmationNotification(dealId, userId, userRole);
 
     // Проверяем, подтвердили ли оба участника
     const {data:deal} = await store.Deals.queryFirst(dealId)
     if(!deal.value) return
     if (deal.value.executor_confirmed && deal.value.customer_confirmed) {
       // Автоматически запускаем сделку
-      await startDeal(dealId);
+      await startDeal(deal.value);
     }
 
-    // Отправляем уведомление другому участнику
-    await sendConfirmationNotification(dealId, userId, userRole);
   };
 
-  const startDeal = async (dealId: string) => {
+  const startDeal = async (deal: Deals) => {
     await store.Deals.update({
-      id:dealId,
+      id:deal.id,
         status: 'active',
         started_at: new Date().getTime()
       })
 
-
     // Создаем уведомление о старте сделки
     await store.Notifications.create({
-      type: 'deal_started',
-      title: 'Сделка запущена!',
+      deal_id: deal.id,
+      user_id: deal.customer_id,
+      type: 'start_confirmation',
+      title: `Сделка ${deal.title} запущена!`,
+      message: 'Оба участника подтвердили старт сделки'
+    });
+    await store.Notifications.create({
+      deal_id: deal.id,
+      user_id: deal.customer_id,
+      type: 'start_confirmation',
+      title: `Сделка ${deal.title} запущена!`,
       message: 'Оба участника подтвердили старт сделки'
     });
   };
@@ -61,7 +70,7 @@ export const useDeals = () => {
     await store.Notifications.create({
       user_id: targetUserId,
       deal_id: dealId,
-      type: 'confirmation_received',
+      type: 'start_confirmation',
       title: 'Подтверждение получено',
       message: `Ваш партнер подтвердил готовность начать сделку`
     });

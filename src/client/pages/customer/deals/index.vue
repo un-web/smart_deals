@@ -23,28 +23,24 @@ const invites = computed(() => {
 const acceptedInvites = computed(() => {
   return deals.value.filter(deal => deal.invitation_accepted)
 })
+
+
+
 const dealsItem = resolveComponent('DealsItem')
 const dealsItemInvite = resolveComponent('DealsItemInvite')
-// console.log(dealsItem.valueOf())
-function add()  {
-  // store.Deals.create({
-  //   title: 'New deal',
-  //   content: 'New deal1111',
-  // })
-  navigateTo('/deals/new')
-}
+
 </script>
 
 <template>
   <div class="grid grid-cols-12 gap-8 p-4" v-if="!loading">
-      <div class="col-span-12 flex flex-col gap-2">
+      <div class="flex flex-col col-span-12 gap-2">
         <h1 class="text-lg">Ваши приглашения</h1>
         <DealsList  v-if="invites.length>0" :items="invites" :component="dealsItemInvite"/>
         <p class="text-sm" v-else>Список пуст</p>
       </div>
 
       <!-- <DealsNew /> -->
-      <div class="col-span-12 flex flex-col gap-2">
+      <div class="flex flex-col col-span-12 gap-2">
 
       <h1 class="text-lg">Сделки в которых вы участвуете</h1>
       <DealsList  v-if="acceptedInvites.length>0" :items="acceptedInvites" :component="dealsItem"/>

@@ -29,7 +29,6 @@ const { data: stages, loading: loadingStages } = await store.DealStages.liveQuer
       <DealsDetails :deal="deal"/>
       <DealsStatus :deal="deal"/>
       <DealsContracter :deal="deal" />
-
      </div>
     <Collapsible class="space-y-2 w-min" v-if="deal?.content">
       <div class="flex items-center justify-between space-x-4">

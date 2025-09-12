@@ -30,7 +30,7 @@ await auth.initializeAuth()
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
-            <div class="flex items-center">
+            <div class="flex items-center gap-2">
               <Notifications :user="auth.user.value" />
               <Button
                 class=" border border-gray-300 border-dashed rounded-full toggle-dark dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 top-4 right-4 z-[9999] text-foreground"

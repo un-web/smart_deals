@@ -9,7 +9,7 @@ const [addStageMode, toggleAddStageMode] = useToggle(false)
 
 const route = useRoute()
 const store = useStore()
-
+console.log(route.params.id)
 const { data: deal, loading: loadingDeal } = await store.Deals.queryFirst(route.params.id as string)
 const { data: stages, loading: loadingStages } = await store.DealStages.liveQueryMany({
   filter: {
